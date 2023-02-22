@@ -58,15 +58,18 @@ const oauthInstance = squareClient.oAuthApi;
 
 app.get("/callback", async (req, res) => {
   console.log(req.query);
-  // // Verify the state to protect against cross-site request forgery.
-  // if (req.cookies["Auth_State"] !== req.query["state"]) {
-  //   content = messages.displayStateError();
-  //   res.render("base", {
-  //     content: content,
-  //   });
-  // } else
+  console.log(req.cookies);
 
-  if (req.query["error"]) {
+  // Verify the state to protect against cross-site request forgery.
+  if (req.cookies["Auth_State"] !== req.query["state"]) {
+    console.log(
+      "=========== in req.cookies['Auth_State'] !== req.query['state'] ========="
+    );
+    content = messages.displayStateError();
+    res.render("base", {
+      content: content,
+    });
+  } else if (req.query["error"]) {
     console.log("=========== in req.query['error'] =========");
 
     // Check to see if the seller clicked the Deny button and handle it as a special case.
