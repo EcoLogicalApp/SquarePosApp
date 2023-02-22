@@ -1,0 +1,39 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-squareposapp-dev-04854-authRole",
+      "UnauthRoleArn": "arn:aws:iam::121347899823:role/amplify-squareposapp-dev-04854-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::121347899823:role/amplify-squareposapp-dev-04854-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-squareposapp-dev-04854-deployment",
+      "UnauthRoleName": "amplify-squareposapp-dev-04854-unauthRole",
+      "StackName": "amplify-squareposapp-dev-04854",
+      "StackId": "arn:aws:cloudformation:us-west-1:121347899823:stack/amplify-squareposapp-dev-04854/bfcbe250-add6-11ed-bb5e-020f80956afb",
+      "AmplifyAppId": "d33k5wys53cms0"
+    },
+    "categories": {
+      "function": {
+        "oauthcallbacklambda": {
+          "deploymentBucketName": "amplify-squareposapp-dev-04854-deployment",
+          "s3Key": "amplify-builds/oauthcallbacklambda-4b5239672f6258544761-build.zip"
+        }
+      },
+      "api": {
+        "oauthcallbackapi": {}
+      }
+    }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-squareposapp-prod-05047-authRole",
+      "UnauthRoleArn": "arn:aws:iam::121347899823:role/amplify-squareposapp-prod-05047-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::121347899823:role/amplify-squareposapp-prod-05047-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-squareposapp-prod-05047-deployment",
+      "UnauthRoleName": "amplify-squareposapp-prod-05047-unauthRole",
+      "StackName": "amplify-squareposapp-prod-05047",
+      "StackId": "arn:aws:cloudformation:us-west-1:121347899823:stack/amplify-squareposapp-prod-05047/032bf620-add7-11ed-863d-02129d75b513",
+      "AmplifyAppId": "d33k5wys53cms0"
+    }
+  }
+}

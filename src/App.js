@@ -1,5 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+
+import { API } from "aws-amplify";
 
 function App() {
   return (
