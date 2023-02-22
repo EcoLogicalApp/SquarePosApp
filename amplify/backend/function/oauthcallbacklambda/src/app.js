@@ -13,7 +13,7 @@ const cookieParser = require("cookie-parser");
 const md5 = require("md5");
 const { ApiError, Client, Environment } = require("square");
 app.use(cookieParser());
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public")); // TODO: this path does not work well
 app.set("view engine", "ejs");
 
 const { PORT, SQ_ENVIRONMENT, SQ_APPLICATION_ID, SQ_APPLICATION_SECRET } =
@@ -37,7 +37,7 @@ const messages = require("./messages"); //TODO: need to update message file
 // Configure Square defcault client
 const squareClient = new Client({
   environment: environment,
-  userAgentDetail: "sample_app_oauth_node", // Remove or replace this detail when building your own app
+  userAgentDetail: "ecological_oauth_node", // Remove or replace this detail when building your own app
 });
 
 // Configure Square OAuth API instance
@@ -53,7 +53,7 @@ const oauthInstance = squareClient.oAuthApi;
 // });
 
 /**********************
- * get method *
+ * get method for callback*
  **********************/
 
 app.get("/callback", async (req, res) => {
@@ -151,28 +151,24 @@ app.get("/callback", async (req, res) => {
     } catch (error) {
       // The response from the Obtain Token endpoint did not include an access token. Something went wrong.
       if (error instanceof ApiError) {
-        // content = messages.displayError(
-        //   "Exception",
-        //   JSON.stringify(error.result)
-        // );
-        // res.render("base", {
-        //   content: content,
-        // });
         console.log(
           "JSON.stringify(error.result)",
           JSON.stringify(error.result)
         );
-        res.json({
-          exception: "Exception!",
-          messages: JSON.stringify(error.result),
+
+        content = messages.displayError(
+          "Exception",
+          JSON.stringify(error.result)
+        );
+        res.render("base", {
+          content: content,
         });
       } else {
-        // content = messages.displayError("Exception", JSON.stringify(error));
-        // res.render("base", {
-        //   content: content,
-        // });
         console.log("JSON.stringify(error)", JSON.stringify(error));
-        res.json({ exception: "Exception!", messages: JSON.stringify(error) });
+        content = messages.displayError("Exception", JSON.stringify(error));
+        res.render("base", {
+          content: content,
+        });
       }
     }
   } else {
@@ -184,7 +180,6 @@ app.get("/callback", async (req, res) => {
     res.render("base", {
       content: content,
     });
-    // res.json({ content });
   }
 });
 
