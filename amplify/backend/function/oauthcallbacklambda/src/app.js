@@ -53,7 +53,7 @@ const oauthInstance = squareClient.oAuthApi;
 // });
 
 /**********************
- * get method for callback*
+ * get method for callback *
  **********************/
 
 app.get("/callback", async (req, res) => {
@@ -136,6 +136,7 @@ app.get("/callback", async (req, res) => {
         merchantId,
       } = result;
 
+      // TODO:
       // Because we want to keep things simple and we're using Sandbox,
       // we call a function that writes the tokens to the page so we can easily copy and use them directly.
       // In production, you should never write tokens to the page. You should encrypt the tokens and handle them securely.
@@ -184,6 +185,27 @@ app.get("/callback", async (req, res) => {
     res.render("base", {
       content: content,
     });
+  }
+});
+
+/**********************
+ * get method for revoke *
+ **********************/
+
+app.get("/revoke", async (req, res) => {
+  try {
+    const response = await oauthInstance.revokeToken(
+      {
+        clientId: process.env.SQ_APPLICATION_ID,
+        accessToken: accessToken, // TODO: this value should be from DB. we can use the merchant id to get this?
+        revokeOnlyAccessToken: true,
+      },
+      "Client " + process.env.SQ_APPLICATION_SECRET
+    );
+
+    console.log(response.result);
+  } catch (error) {
+    console.log(error);
   }
 });
 

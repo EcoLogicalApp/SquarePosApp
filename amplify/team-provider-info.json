@@ -15,7 +15,7 @@
       "function": {
         "oauthcallbacklambda": {
           "deploymentBucketName": "amplify-squareposapp-dev-04854-deployment",
-          "s3Key": "amplify-builds/oauthcallbacklambda-4b5239672f6258544761-build.zip"
+          "s3Key": "amplify-builds/oauthcallbacklambda-43315a317949396a5166-build.zip"
         }
       },
       "api": {
