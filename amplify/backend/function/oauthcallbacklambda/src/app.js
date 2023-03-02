@@ -33,6 +33,7 @@ if (SQ_ENVIRONMENT.toLowerCase() === "production") {
 }
 
 const messages = require("./messages"); //TODO: need to update message file
+const aes_algo = require("./aes");
 
 // Configure Square defcault client
 const squareClient = new Client({
@@ -57,6 +58,8 @@ const oauthInstance = squareClient.oAuthApi;
  **********************/
 
 app.get("/callback", async (req, res) => {
+  console.log("======== callback ========");
+  console.log(__dirname);
   console.log(req.query);
 
   // console.log(req.cookies);
@@ -146,6 +149,12 @@ app.get("/callback", async (req, res) => {
         expiresAt,
         merchantId
       );
+
+      console.log("accessToken : ", accessToken);
+      let encryptedAccessToken = aes_algo.encrypt(accessToken);
+      console.log("encrypedAccessToken : ", encryptedAccessToken);
+      let decryptedAccessToken = aes_algo.decrypt(encryptedAccessToken);
+      console.log("decryptedAccessToken : ", decryptedAccessToken);
 
       console.log("=========== before render =========");
 
