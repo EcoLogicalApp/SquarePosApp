@@ -154,7 +154,7 @@ app.get("/callback", async (req, res) => {
       let encryptedAccessToken = aes_algo.encrypt(accessToken);
       console.log("encrypedAccessToken : ", encryptedAccessToken);
       let decryptedAccessToken = aes_algo.decrypt(encryptedAccessToken);
-      console.log("decryptedAccessToken : ", decryptedAccessToken);
+      console.log("decryptedAccessToken : ", decryptedAccessToken.toString());
 
       console.log("=========== before render =========");
 
