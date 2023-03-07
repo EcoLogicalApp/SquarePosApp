@@ -33,6 +33,7 @@ if (SQ_ENVIRONMENT.toLowerCase() === "production") {
 }
 
 const messages = require("./messages"); //TODO: need to update message file
+const aes_algo = require("./aes");
 
 // Configure Square defcault client
 const squareClient = new Client({
@@ -57,6 +58,8 @@ const oauthInstance = squareClient.oAuthApi;
  **********************/
 
 app.get("/callback", async (req, res) => {
+  console.log("======== callback ========");
+  console.log(__dirname);
   console.log(req.query);
   // // Verify the state to protect against cross-site request forgery.
   // if (req.cookies["Auth_State"] !== req.query["state"]) {
@@ -132,6 +135,7 @@ app.get("/callback", async (req, res) => {
         merchantId,
       } = result;
 
+      // TODO:
       // Because we want to keep things simple and we're using Sandbox,
       // we call a function that writes the tokens to the page so we can easily copy and use them directly.
       // In production, you should never write tokens to the page. You should encrypt the tokens and handle them securely.
@@ -141,6 +145,12 @@ app.get("/callback", async (req, res) => {
         expiresAt,
         merchantId
       );
+
+      console.log("accessToken : ", accessToken);
+      let encryptedAccessToken = aes_algo.encrypt(accessToken);
+      console.log("encrypedAccessToken : ", encryptedAccessToken);
+      let decryptedAccessToken = aes_algo.decrypt(encryptedAccessToken);
+      console.log("decryptedAccessToken : ", decryptedAccessToken.toString());
 
       console.log("=========== before render =========");
 
@@ -180,6 +190,27 @@ app.get("/callback", async (req, res) => {
     res.render("base", {
       content: content,
     });
+  }
+});
+
+/**********************
+ * get method for revoke *
+ **********************/
+
+app.get("/revoke", async (req, res) => {
+  try {
+    const response = await oauthInstance.revokeToken(
+      {
+        clientId: process.env.SQ_APPLICATION_ID,
+        accessToken: accessToken, // TODO: this value should be from DB. we can use the merchant id to get this?
+        revokeOnlyAccessToken: true,
+      },
+      "Client " + process.env.SQ_APPLICATION_SECRET
+    );
+
+    console.log(response.result);
+  } catch (error) {
+    console.log(error);
   }
 });
 
