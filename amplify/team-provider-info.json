@@ -36,7 +36,7 @@
       "function": {
         "oauthcallbacklambda": {
           "deploymentBucketName": "amplify-sellerapp-dev-220928-deployment",
-          "s3Key": "amplify-builds/oauthcallbacklambda-5553706954504f744b37-build.zip"
+          "s3Key": "amplify-builds/oauthcallbacklambda-4d436b36364967774871-build.zip"
         }
       },
       "api": {
