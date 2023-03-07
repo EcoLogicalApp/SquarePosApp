@@ -3,12 +3,12 @@
     "oauthcallbackapi": {
       "dependsOn": [
         {
+          "category": "function",
+          "resourceName": "oauthcallbacklambda",
           "attributes": [
             "Name",
             "Arn"
-          ],
-          "category": "function",
-          "resourceName": "oauthcallbacklambda"
+          ]
         }
       ],
       "providerPlugin": "awscloudformation",
