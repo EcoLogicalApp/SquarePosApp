@@ -1,4 +1,20 @@
 {
+  "api": {
+    "oauthcallbackapi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "oauthcallbacklambda"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "function": {
     "oauthcallbacklambda": {
       "build": true,
@@ -6,18 +22,20 @@
       "service": "Lambda"
     }
   },
-  "api": {
-    "oauthcallbackapi": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
+  "parameters": {
+    "AMPLIFY_function_oauthcallbacklambda_deploymentBucketName": {
+      "usedBy": [
         {
           "category": "function",
-          "resourceName": "oauthcallbacklambda",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
+          "resourceName": "oauthcallbacklambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_oauthcallbacklambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "oauthcallbacklambda"
         }
       ]
     }

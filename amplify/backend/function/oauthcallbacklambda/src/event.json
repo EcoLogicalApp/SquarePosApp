@@ -1,6 +1,6 @@
 {
   "httpMethod": "POST",
-  "path": "/callback",
+  "path": "/item",
   "queryStringParameters": {
     "limit": "10"
   },

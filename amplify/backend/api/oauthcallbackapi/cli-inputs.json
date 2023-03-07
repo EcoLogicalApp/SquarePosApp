@@ -7,13 +7,6 @@
       "permissions": {
         "setting": "open"
       }
-    },
-    "/revoke": {
-      "name": "/revoke",
-      "lambdaFunction": "oauthcallbacklambda",
-      "permissions": {
-        "setting": "open"
-      }
     }
   }
 }
